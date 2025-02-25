@@ -12,20 +12,20 @@ struct TaskPlannerApp: App {
         WindowGroup {
             CustomTabBarContainerView(viewModel: TabViewModel(),
                                       tabBarItems: [
+                                        
+                             TabBarItem(title: "Board",
+                                        iconName: "list.bullet",
+                                        contentView: {AnyView({
+                                            BoardView()
+                                                .frame(maxHeight: .infinity)
+                                        }())
+                                        }),
                                         TabBarItem(title: "Calendar",
                                                    iconName: "calendar",
                                                    contentView: {AnyView({
                                                        TaskView()
                                                    }())
-                                                   }),
-                                        TabBarItem(title: "Board",
-                                                   iconName: "list.bullet",
-                                                   contentView: {AnyView({
-                                                       BoardView()
-                                                           .frame(maxHeight: .infinity)
-                                                   }())
                                                    })
-                                                   
                                       ])
         }
         .modelContainer(for: Task.self)

@@ -80,14 +80,10 @@
 		5BB787782BD45A4A00042BE5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5BED12132BD2FDF600147ACD /* TaskView.swift */,
-				5BED120D2BD2FB1000147ACD /* TaskListView.swift */,
+				80E394172D6E682B00E0D1BB /* Calendar */,
 				8029630A2D6BAF260075E8CB /* GeneralPurpose */,
-				5B877D5C2BD51EB700444F9C /* TaskItemView.swift */,
-				8001D5C82D6BC7D900A8F5C9 /* TaskGridItemView.swift */,
-				802963112D6BB26F0075E8CB /* BoardView.swift */,
-				5BB787792BD45C9500042BE5 /* TaskSheetView.swift */,
-				5BB787702BD3D52400042BE5 /* WeekHeaderView.swift */,
+				80E394182D6E684200E0D1BB /* BoardView */,
+				80E394192D6E686800E0D1BB /* Dialogs */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -147,6 +143,34 @@
 				8029630F2D6BB0A00075E8CB /* BlurVisualEffectViewRepresentable.swift */,
 			);
 			path = GeneralPurpose;
+			sourceTree = "<group>";
+		};
+		80E394172D6E682B00E0D1BB /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				5BED120D2BD2FB1000147ACD /* TaskListView.swift */,
+				5BB787702BD3D52400042BE5 /* WeekHeaderView.swift */,
+				5B877D5C2BD51EB700444F9C /* TaskItemView.swift */,
+				5BED12132BD2FDF600147ACD /* TaskView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		80E394182D6E684200E0D1BB /* BoardView */ = {
+			isa = PBXGroup;
+			children = (
+				802963112D6BB26F0075E8CB /* BoardView.swift */,
+				8001D5C82D6BC7D900A8F5C9 /* TaskGridItemView.swift */,
+			);
+			path = BoardView;
+			sourceTree = "<group>";
+		};
+		80E394192D6E686800E0D1BB /* Dialogs */ = {
+			isa = PBXGroup;
+			children = (
+				5BB787792BD45C9500042BE5 /* TaskSheetView.swift */,
+			);
+			path = Dialogs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

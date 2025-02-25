@@ -41,8 +41,7 @@ struct TaskListView: View {
                         }
                 }
             }
-            .padding(.top, 20)
-//            .preferredColorScheme(.dark)       
+            .padding(.top, 20)       
         }
     }
 }

@@ -93,7 +93,6 @@ struct WeekHeaderView: View {
         .onAppear {
             viewModel.currentIndex = min(max(viewModel.currentIndex, 0), viewModel.allWeeks.count - 1)
         }
-        .preferredColorScheme(.dark)
     }
     
     func distance(_ item: Int) -> Double {

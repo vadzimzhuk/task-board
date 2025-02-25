@@ -42,14 +42,20 @@ struct TaskSheetView: View {
                     
                     Spacer()
                     
-                    TextField("  Title", text: $taskTitle)
-                        .font(.body)
-                        .frame(height: 35)
-                        .foregroundColor(Color.secondaryText)
+                    TextField("Title", text: $taskTitle)
+                        .padding(10)
+                        .background(Color(.systemGray6).opacity(0.3))
                         .cornerRadius(6)
-                        .border(Color.gray)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 6)
+                                .stroke(Color.gray, lineWidth: 1)
+                        )
+                        .font(.body)
+                        .frame(height: 25)
+                        .foregroundColor(Color.secondaryText)
                         
                     Toggle("Due date", isOn: $hasDate)
+                        .padding(10)
                         .font(.body)
                         .foregroundColor(Color.primary)
                     
@@ -88,7 +94,6 @@ struct TaskSheetView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             .ignoresSafeArea()
-            .preferredColorScheme(.dark)
             .padding(.bottom)
     }
 }
