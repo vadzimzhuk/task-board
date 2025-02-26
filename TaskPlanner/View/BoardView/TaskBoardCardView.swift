@@ -6,7 +6,7 @@
 import SwiftUI
 import SwiftData
 
-struct TaskGridItemView: View {
+struct TaskBoardCardView: View {
     @Bindable var task: Task
     @Environment(\.modelContext) private var context
     
@@ -17,19 +17,21 @@ struct TaskGridItemView: View {
             VStack(alignment: .leading, spacing: 10) {
                 if task.isCompleted {
                     Text(task.title)
-                        .font(.headline)
+                        .fixedSize(horizontal: false, vertical: false)
+                        .font(Font.system(size: 12, weight: .bold))
                         .strikethrough()
-                    Label("\(task.date.format("hh:mm a"))", systemImage: "clock")
-                        .font(.subheadline)
-                        .strikethrough()
+//                    Label("\(task.date.format("DD:MM a"))", systemImage: "clock")
+//                        .font(.subheadline)
+//                        .strikethrough()
                 } else {
                     Text(task.title)
-                        .font(.headline)
-                    Label("\(task.date.format("hh:mm a"))", systemImage: "clock")
-                        .font(.subheadline)
+                        .font(Font.system(size: 12, weight: .bold))
+//                    Label("\(task.date.format("hh:mm a"))", systemImage: "clock")
+//                        .font(.subheadline)
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: 35, alignment: .leading)
+            .frame(height: 55)
+            .frame(maxWidth: .infinity, maxHeight: 55, alignment: .leading)
             .padding()
             .background(isSwipingToDelete ? Color.red.opacity(0.7) : Color.theme.darkBackground)
             .clipShape(.rect(cornerRadius: 15))
@@ -44,8 +46,8 @@ struct TaskGridItemView: View {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: Task.self, configurations: config)
     
-    let task = Task(title: "Example Task", date: Date())
+    let task = Task(title: "Example Task", dueDate: Date())
     
-    return TaskGridItemView(task: task)
+    return TaskBoardCardView(task: task)
         .modelContainer(container)
 }

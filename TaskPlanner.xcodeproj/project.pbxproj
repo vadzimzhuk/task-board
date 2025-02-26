@@ -19,7 +19,7 @@
 		5BED12142BD2FDF600147ACD /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BED12132BD2FDF600147ACD /* TaskView.swift */; };
 		5BED12162BD3036600147ACD /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BED12152BD3036600147ACD /* TaskViewModel.swift */; };
 		5BED12182BD30CB900147ACD /* Week.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BED12172BD30CB900147ACD /* Week.swift */; };
-		8001D5C92D6BC7D900A8F5C9 /* TaskGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8001D5C82D6BC7D900A8F5C9 /* TaskGridItemView.swift */; };
+		8001D5C92D6BC7D900A8F5C9 /* TaskBoardCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8001D5C82D6BC7D900A8F5C9 /* TaskBoardCardView.swift */; };
 		802963092D6BAF150075E8CB /* CustomTabBarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802963082D6BAF150075E8CB /* CustomTabBarContainerView.swift */; };
 		8029630C2D6BAFCE0075E8CB /* CustomTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8029630B2D6BAFCE0075E8CB /* CustomTabBarView.swift */; };
 		8029630E2D6BB0370075E8CB /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8029630D2D6BB0370075E8CB /* TabBarItem.swift */; };
@@ -41,7 +41,7 @@
 		5BED12132BD2FDF600147ACD /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		5BED12152BD3036600147ACD /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		5BED12172BD30CB900147ACD /* Week.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Week.swift; sourceTree = "<group>"; };
-		8001D5C82D6BC7D900A8F5C9 /* TaskGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskGridItemView.swift; sourceTree = "<group>"; };
+		8001D5C82D6BC7D900A8F5C9 /* TaskBoardCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskBoardCardView.swift; sourceTree = "<group>"; };
 		802963082D6BAF150075E8CB /* CustomTabBarContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarContainerView.swift; sourceTree = "<group>"; };
 		8029630B2D6BAFCE0075E8CB /* CustomTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarView.swift; sourceTree = "<group>"; };
 		8029630D2D6BB0370075E8CB /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				802963112D6BB26F0075E8CB /* BoardView.swift */,
-				8001D5C82D6BC7D900A8F5C9 /* TaskGridItemView.swift */,
+				8001D5C82D6BC7D900A8F5C9 /* TaskBoardCardView.swift */,
 			);
 			path = BoardView;
 			sourceTree = "<group>";
@@ -257,7 +257,7 @@
 				5BB7877A2BD45C9500042BE5 /* TaskSheetView.swift in Sources */,
 				802963122D6BB27A0075E8CB /* BoardView.swift in Sources */,
 				5BED12002BD2FAC200147ACD /* TaskPlannerApp.swift in Sources */,
-				8001D5C92D6BC7D900A8F5C9 /* TaskGridItemView.swift in Sources */,
+				8001D5C92D6BC7D900A8F5C9 /* TaskBoardCardView.swift in Sources */,
 				5BB787712BD3D52400042BE5 /* WeekHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

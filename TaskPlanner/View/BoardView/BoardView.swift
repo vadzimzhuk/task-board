@@ -59,9 +59,10 @@ struct BoardView: View {
                     HStack(alignment: .top) {
                         LazyVStack {
                             Text("Open")
+                                .font(.headline)
                             
                             ForEach(openTasks) { task in
-                                TaskGridItemView(task: task)
+                                TaskBoardCardView(task: task)
                                     .draggable({
                                         itemDragged = task
                                         return task
@@ -92,9 +93,10 @@ struct BoardView: View {
                         
                         LazyVStack {
                             Text("In Progress")
+                                .font(.headline)
                             
                             ForEach(inProgressTasks) { task in
-                                TaskGridItemView(task: task)
+                                TaskBoardCardView(task: task)
                                     .draggable({
                                         itemDragged = task
                                         return task
@@ -124,9 +126,10 @@ struct BoardView: View {
                         
                         LazyVStack {
                             Text("Done")
+                                .font(.headline)
                             
                             ForEach(completedTasks) { task in
-                                TaskGridItemView(task: task)
+                                TaskBoardCardView(task: task)
                                     .draggable({
                                         itemDragged = task
                                         return task
@@ -157,6 +160,7 @@ struct BoardView: View {
                 }
                 .padding(.top, 100)
             }
+            .padding(10)
             .ignoresSafeArea()
             .toolbar{
                 ToolbarItem(placement: .topBarTrailing) {

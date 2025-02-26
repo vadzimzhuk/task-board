@@ -9,7 +9,8 @@ import SwiftData
 struct TaskSheetView: View {
     @State private var taskTitle: String = ""
     @State private var hasDate: Bool = false
-    @State private var taskDate: Date = .init()
+    @State private var dueDate: Date?
+    @State private var taskDate: Date = Date()
     
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) private var context
@@ -26,7 +27,7 @@ struct TaskSheetView: View {
                         Spacer()
                         
                         Button {
-                            let task = Task(title: taskTitle, date: taskDate)
+                            let task = Task(title: taskTitle, dueDate: dueDate)
                             do {
                                 context.insert(task)
                                 try context.save()
@@ -73,7 +74,7 @@ struct TaskSheetView: View {
                 Spacer()
                 
                 Button {
-                    let task = Task(title: taskTitle, date: taskDate)
+                    let task = Task(title: taskTitle, dueDate: dueDate)
                     do {
                         context.insert(task)
                         try context.save()
@@ -95,6 +96,16 @@ struct TaskSheetView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             .ignoresSafeArea()
             .padding(.bottom)
+            .onChange(of: hasDate) { _, hasDate in
+                if hasDate {
+                    dueDate = taskDate
+                } else {
+                    dueDate = nil
+                }
+            }
+            .onChange(of: taskDate) { _, taskDate in
+                dueDate = taskDate
+            }
     }
 }
 

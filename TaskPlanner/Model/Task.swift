@@ -15,41 +15,52 @@ class Task: Identifiable, Codable, Transferable {
     
     var id: UUID
     var title: String
-    var date: Date
+    var dueDate: Date?
+    var completionDate: Date?
+    var creationDate: Date
     var isCompleted: Bool {
         taskState == .completed
     }
     var taskState: TaskState
     
-    init(id: UUID = .init(), title: String, date: Date, isCompleted: Bool = false, taskState: TaskState = .open) {
+    init(id: UUID = .init(), title: String, dueDate: Date? = nil, taskState: TaskState = .open, creationDate: Date = Date(), completionDate: Date? = nil) {
         self.id = id
         self.title = title
-        self.date = date
+        self.dueDate = dueDate
         self.taskState = taskState
+        self.creationDate = creationDate
+        self.completionDate = completionDate
     }
     
     required init(from decoder: any Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         id = try values.decode(UUID.self, forKey: .id)
         title = try values.decode(String.self, forKey: .title)
-        date = try values.decode(Date.self, forKey: .date)
+        dueDate = try? values.decode(Date.self, forKey: .dueDate)
         taskState = (try? values.decode(TaskState.self, forKey: .taskState)) ?? .open
+        creationDate = (try? values.decode(Date.self, forKey: .creationDate)) ?? Date()
+        completionDate = try? values.decode(Date?.self, forKey: .completionDate)
     }
     
     func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(title, forKey: .title)
-        try container.encode(date, forKey: .date)
+        try container.encode(dueDate, forKey: .dueDate)
+        try container.encode(taskState, forKey: .taskState)
         try container.encode(isCompleted, forKey: .isCompleted)
+        try container.encode(creationDate, forKey: .creationDate)
+        try container.encode(completionDate, forKey: .completionDate)
     }
     
     enum CodingKeys: String, CodingKey {
         case id
         case title
-        case date
+        case dueDate
         case isCompleted
         case taskState
+        case creationDate
+        case completionDate
     }
 }
 

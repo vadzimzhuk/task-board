@@ -11,7 +11,7 @@ struct TaskItemView: View {
     @Environment(\.modelContext) private var context
     
     @State private var offset = CGSize.zero
-    @State private var isSwipingToDelete = false
+//    @State private var isSwipingToDelete = false
     
     var body: some View {
         HStack(spacing: 5) {
@@ -24,36 +24,40 @@ struct TaskItemView: View {
                     Text(task.title)
                         .font(.headline)
                         .strikethrough()
-                    Label("\(task.date.format("hh:mm a"))", systemImage: "clock")
-                        .font(.subheadline)
-                        .strikethrough()
+                    if let dueDate = task.dueDate {
+                        Label("\(dueDate.format("hh:mm a"))", systemImage: "clock")
+                            .font(.subheadline)
+                            .strikethrough()
+                    }
                 } else {
                     Text(task.title)
                         .font(.headline)
-                    Label("\(task.date.format("hh:mm a"))", systemImage: "clock")
-                        .font(.subheadline)
+                    if let dueDate = task.dueDate {
+                        Label("\(dueDate.format("hh:mm a"))", systemImage: "clock")
+                            .font(.subheadline)
+                    }
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: 35, alignment: .leading)
             .padding()
-            .background(isSwipingToDelete ? Color.red.opacity(0.7) : Color.theme.darkBackground)
+//            .background(isSwipingToDelete ? Color.red.opacity(0.7) : Color.theme.darkBackground)
             .clipShape(.rect(cornerRadius: 15))
-            .onTapGesture {
-            }
+//            .onTapGesture {
+//            }
             .opacity(2 - Double(abs(offset.width / 90)))
-            .gesture(
-                DragGesture(minimumDistance: 10)
-                .onChanged { gesture in
-                    offset = gesture.translation
-                    isSwipingToDelete = true
-                }
-                .onEnded { gesture in
-                    isSwipingToDelete = false
-                    
-                    if gesture.translation.width < -100 {
-                        context.delete(task)
-                    }
-                })
+//            .gesture(
+//                DragGesture(minimumDistance: 10)
+//                .onChanged { gesture in
+//                    offset = gesture.translation
+//                    isSwipingToDelete = true
+//                }
+//                .onEnded { gesture in
+//                    isSwipingToDelete = false
+//                    
+//                    if gesture.translation.width < -100 {
+//                        context.delete(task)
+//                    }
+//                })
         }
         .padding(.horizontal)
         .padding(.bottom, 25)
@@ -65,7 +69,7 @@ struct TaskItemView: View {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: Task.self, configurations: config)
     
-    let task = Task(title: "Example Task", date: Date())
+    let task = Task(title: "Example Task", dueDate: Date())
     
     return TaskItemView(task: task)
         .modelContainer(container)
