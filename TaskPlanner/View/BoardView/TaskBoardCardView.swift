@@ -35,8 +35,6 @@ struct TaskBoardCardView: View {
             .padding()
             .background(isSwipingToDelete ? Color.red.opacity(0.7) : Color.theme.darkBackground)
             .clipShape(.rect(cornerRadius: 15))
-            .onTapGesture {
-            }
             .opacity(2 - Double(abs(offset.width / 90)))
     }
 }

@@ -7,13 +7,24 @@ import SwiftUI
 import SwiftData
 
 struct TaskSheetView: View {
-    @State private var taskTitle: String = ""
-    @State private var hasDate: Bool = false
+    @State private var taskTitle: String
+    @State private var hasDate: Bool
     @State private var dueDate: Date?
-    @State private var taskDate: Date = Date()
+    @State private var taskDate: Date
+    @State private var editedTask: Task
+    @State private var newTask: Bool
     
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) private var context
+    
+    init(editedTask: Task = Task(title: "")) {
+        self.newTask = editedTask.title.isEmpty
+        self.editedTask = editedTask
+        self.taskTitle = editedTask.title
+        self.dueDate = editedTask.dueDate
+        self.hasDate = editedTask.dueDate != nil
+        self.taskDate = editedTask.dueDate ?? Date()
+    }
     
     var body: some View {
             VStack(alignment: .leading, spacing: 25) {
@@ -27,16 +38,18 @@ struct TaskSheetView: View {
                         Spacer()
                         
                         Button {
-                            let task = Task(title: taskTitle, dueDate: dueDate)
+                            let task = editedTask
                             do {
-                                context.insert(task)
+                                if newTask {
+                                    context.insert(task)
+                                }
                                 try context.save()
                                 dismiss()
                             } catch {
                                 print(error.localizedDescription)
                             }
                         } label: {
-                            Text("Add")
+                            Text(newTask ? "Create" : "Save")
                                 .foregroundColor(.primary)
                         }
                     }
@@ -53,7 +66,7 @@ struct TaskSheetView: View {
                         )
                         .font(.body)
                         .frame(height: 25)
-                        .foregroundColor(Color.secondaryText)
+//                        .foregroundColor(Color.secondaryText)
                         
                     Toggle("Due date", isOn: $hasDate)
                         .padding(10)
@@ -74,16 +87,18 @@ struct TaskSheetView: View {
                 Spacer()
                 
                 Button {
-                    let task = Task(title: taskTitle, dueDate: dueDate)
+                    let task = editedTask
                     do {
-                        context.insert(task)
+                        if newTask {
+                            context.insert(task)
+                        }
                         try context.save()
                         dismiss()
                     } catch {
                         print(error.localizedDescription)
                     }
                 } label: {
-                    Text("Add Task")
+                    Text(newTask ? "Create" : "Save")
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity)
                         .frame(height: 48)
@@ -105,6 +120,12 @@ struct TaskSheetView: View {
             }
             .onChange(of: taskDate) { _, taskDate in
                 dueDate = taskDate
+            }
+            .onChange(of: taskTitle) { _, taskTitle in
+                editedTask.title = taskTitle
+            }
+            .onChange(of: dueDate) { _, dueDate in
+                editedTask.dueDate = dueDate
             }
     }
 }

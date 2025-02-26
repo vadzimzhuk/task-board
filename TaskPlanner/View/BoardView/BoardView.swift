@@ -23,6 +23,8 @@ struct BoardView: View {
     @State private var isTargeted3: Bool = false
     
     @State private var createNewTask: Bool = false
+    @State private var editTask: Bool = false
+    @State private var editedTask: Task?
     @State private var itemDragged: Task?
     
     let columns = [
@@ -67,6 +69,9 @@ struct BoardView: View {
                                         itemDragged = task
                                         return task
                                     }())
+                                    .onTapGesture {
+                                        editedTask = task
+                                    }
                             }
                             
                             Background(isTargeted: $isTargeted1)
@@ -79,6 +84,8 @@ struct BoardView: View {
                                 }
                             }
                             itemDragged = nil
+                            try? context.save()
+                            
                             return true
                         }
                         isTargeted: { targeted in
@@ -101,6 +108,9 @@ struct BoardView: View {
                                         itemDragged = task
                                         return task
                                     }())
+                                    .onTapGesture {
+                                        editedTask = task
+                                    }
                             }
                             
                             Background(isTargeted: $isTargeted2)
@@ -112,6 +122,9 @@ struct BoardView: View {
                                     task.taskState = .inProgress
                                 }
                             }
+                            itemDragged = nil
+                            try? context.save()
+                            
                             return true
                         }
                         isTargeted: { targeted in
@@ -134,6 +147,9 @@ struct BoardView: View {
                                         itemDragged = task
                                         return task
                                     }())
+                                    .onTapGesture {
+                                        editedTask = task
+                                    }
                             }
                             
                             Background(isTargeted: $isTargeted3)
@@ -145,6 +161,8 @@ struct BoardView: View {
                                     task.taskState = .completed
                                 }
                             }
+                            itemDragged = nil
+                            try? context.save()
                             
                             return true
                         } isTargeted: { targeted in
@@ -175,6 +193,21 @@ struct BoardView: View {
                             .presentationDetents([.height(380)])
                             .presentationBackground(.thinMaterial)
                     }
+                    .sheet(isPresented: $editTask) {
+                        if let editedTask {
+                            TaskSheetView(editedTask: editedTask)
+                                .presentationDetents([.height(380)])
+                                .presentationBackground(.thinMaterial)
+                        } else { EmptyView() }
+                    }
+                }
+            }
+            .onChange(of: editedTask) { oldValue, newValue in
+                editTask = editedTask != nil
+            }
+            .onChange(of: editTask) { _, editTask in
+                if !editTask {
+                    editedTask = nil
                 }
             }
         }
