@@ -54,8 +54,7 @@ struct BoardView: View {
     }
     
     var body: some View {
-        
-        NavigationStack {
+//        NavigationStack {
             ScrollView(.vertical, showsIndicators: true) {
                 VStack{
                     HStack(alignment: .top) {
@@ -74,9 +73,13 @@ struct BoardView: View {
                                     }
                             }
                             
+                            NewTicketButton(createNewTask: $createNewTask)
+                                .padding(.top)
+                            
                             Background(isTargeted: $isTargeted1)
-                                .frame(minHeight: 500)
+                                .frame(minHeight: 600)
                         }
+                        .padding(.top, 100)
                         .dropDestination(for: Task.self) { tasks, location in
                             for task in tasks {
                                 if let task = (self.tasks.first { $0.id == task.id }){
@@ -114,8 +117,9 @@ struct BoardView: View {
                             }
                             
                             Background(isTargeted: $isTargeted2)
-                                .frame(minHeight: 500)
+                                .frame(minHeight: 600)
                         }
+                        .padding(.top, 100)
                         .dropDestination(for: Task.self) { tasks, location in
                             for task in tasks {
                                 if let task = (self.tasks.first { $0.id == task.id }){
@@ -153,8 +157,9 @@ struct BoardView: View {
                             }
                             
                             Background(isTargeted: $isTargeted3)
-                                .frame(minHeight: 500)
+                                .frame(minHeight: 600)
                         }
+                        .padding(.top, 100)
                         .dropDestination(for: Task.self) { tasks, location in
                             for task in tasks {
                                 if let task = (self.tasks.first { $0.id == task.id }){
@@ -176,7 +181,7 @@ struct BoardView: View {
                         .background(Background(isTargeted: $isTargeted3))
                     }
                 }
-                .padding(.top, 100)
+//                .padding(.top, 100)
             }
             .padding(10)
             .ignoresSafeArea()
@@ -210,7 +215,7 @@ struct BoardView: View {
                     editedTask = nil
                 }
             }
-        }
+//        }
     }
 }
 

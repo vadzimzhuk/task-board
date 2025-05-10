@@ -20,21 +20,19 @@ struct TaskBoardCardView: View {
                         .fixedSize(horizontal: false, vertical: false)
                         .font(Font.system(size: 12, weight: .bold))
                         .strikethrough()
-//                    Label("\(task.date.format("DD:MM a"))", systemImage: "clock")
-//                        .font(.subheadline)
-//                        .strikethrough()
                 } else {
                     Text(task.title)
                         .font(Font.system(size: 12, weight: .bold))
-//                    Label("\(task.date.format("hh:mm a"))", systemImage: "clock")
-//                        .font(.subheadline)
                 }
             }
             .frame(height: 55)
             .frame(maxWidth: .infinity, maxHeight: 55, alignment: .leading)
             .padding()
-            .background(isSwipingToDelete ? Color.red.opacity(0.7) : Color.theme.darkBackground)
-            .clipShape(.rect(cornerRadius: 15))
+            .background(isSwipingToDelete ? Color.red.opacity(0.7) : .white)
+            .overlay(
+                RoundedRectangle(cornerRadius: 0)
+                    .stroke(Color.black, lineWidth: 1)
+            )
             .opacity(2 - Double(abs(offset.width / 90)))
     }
 }

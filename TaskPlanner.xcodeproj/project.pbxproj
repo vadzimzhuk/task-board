@@ -25,6 +25,8 @@
 		8029630E2D6BB0370075E8CB /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8029630D2D6BB0370075E8CB /* TabBarItem.swift */; };
 		802963102D6BB0A00075E8CB /* BlurVisualEffectViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8029630F2D6BB0A00075E8CB /* BlurVisualEffectViewRepresentable.swift */; };
 		802963122D6BB27A0075E8CB /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802963112D6BB26F0075E8CB /* BoardView.swift */; };
+		809FD38D2DCE43E100543832 /* BasicButtonVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809FD38C2DCE43E100543832 /* BasicButtonVIew.swift */; };
+		809FD38F2DCE501100543832 /* NewTicketButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809FD38E2DCE501100543832 /* NewTicketButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,8 @@
 		8029630D2D6BB0370075E8CB /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		8029630F2D6BB0A00075E8CB /* BlurVisualEffectViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurVisualEffectViewRepresentable.swift; sourceTree = "<group>"; };
 		802963112D6BB26F0075E8CB /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		809FD38C2DCE43E100543832 /* BasicButtonVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicButtonVIew.swift; sourceTree = "<group>"; };
+		809FD38E2DCE501100543832 /* NewTicketButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTicketButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +144,7 @@
 				802963082D6BAF150075E8CB /* CustomTabBarContainerView.swift */,
 				8029630D2D6BB0370075E8CB /* TabBarItem.swift */,
 				8029630B2D6BAFCE0075E8CB /* CustomTabBarView.swift */,
+				809FD38C2DCE43E100543832 /* BasicButtonVIew.swift */,
 				8029630F2D6BB0A00075E8CB /* BlurVisualEffectViewRepresentable.swift */,
 			);
 			path = GeneralPurpose;
@@ -160,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				802963112D6BB26F0075E8CB /* BoardView.swift */,
+				809FD38E2DCE501100543832 /* NewTicketButton.swift */,
 				8001D5C82D6BC7D900A8F5C9 /* TaskBoardCardView.swift */,
 			);
 			path = BoardView;
@@ -243,6 +249,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				809FD38D2DCE43E100543832 /* BasicButtonVIew.swift in Sources */,
 				5BED12102BD2FB6200147ACD /* Task.swift in Sources */,
 				5BED12162BD3036600147ACD /* TaskViewModel.swift in Sources */,
 				802963092D6BAF150075E8CB /* CustomTabBarContainerView.swift in Sources */,
@@ -250,6 +257,7 @@
 				5BD2FFDE2BD9405700E299BE /* Color.swift in Sources */,
 				5BED12182BD30CB900147ACD /* Week.swift in Sources */,
 				5B877D5D2BD51EB700444F9C /* TaskItemView.swift in Sources */,
+				809FD38F2DCE501100543832 /* NewTicketButton.swift in Sources */,
 				5BED120E2BD2FB1000147ACD /* TaskListView.swift in Sources */,
 				5BED12142BD2FDF600147ACD /* TaskView.swift in Sources */,
 				802963102D6BB0A00075E8CB /* BlurVisualEffectViewRepresentable.swift in Sources */,

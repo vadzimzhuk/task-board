@@ -13,16 +13,9 @@ struct CustomTabBarView: View {
 
     var body: some View {
         VStack {
-            
             HStack {
                 ForEach(0..<tabBarItems.count, id: \.self) { index in
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 25)
-                            .frame(height: 50)
-                            .foregroundStyle(selectedIndex == index ? Color.yellow : Color.yellow.opacity(0.3))
-                        Text(tabBarItems[index].title)
-                            .foregroundStyle(Color.black)
-                    }
+                    BasicButtonVIew(title: tabBarItems[index].title, isSelected: selectedIndex == index)
                     .onTapGesture {
                         selectedIndex = index
                     }

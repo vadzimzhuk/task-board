@@ -40,24 +40,8 @@ struct TaskItemView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: 35, alignment: .leading)
             .padding()
-//            .background(isSwipingToDelete ? Color.red.opacity(0.7) : Color.theme.darkBackground)
             .clipShape(.rect(cornerRadius: 15))
-//            .onTapGesture {
-//            }
             .opacity(2 - Double(abs(offset.width / 90)))
-//            .gesture(
-//                DragGesture(minimumDistance: 10)
-//                .onChanged { gesture in
-//                    offset = gesture.translation
-//                    isSwipingToDelete = true
-//                }
-//                .onEnded { gesture in
-//                    isSwipingToDelete = false
-//                    
-//                    if gesture.translation.width < -100 {
-//                        context.delete(task)
-//                    }
-//                })
         }
         .padding(.horizontal)
         .padding(.bottom, 25)
