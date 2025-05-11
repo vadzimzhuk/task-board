@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct BasicButtonVIew: View {
+struct BasicButtonView: View {
     var title: String = ""
-    var isSelected: Bool = false
+    var isActive: Bool = true
     
     var body: some View {
         ZStack {
@@ -18,14 +18,18 @@ struct BasicButtonVIew: View {
                 .frame(height: 50)
                 .overlay(
                     Rectangle()
-                        .stroke(Color.black, lineWidth: isSelected ? 2 : 1)
+                        .stroke(isActive ? Color.black : Color.gray, lineWidth: 1)
                 )
             Text(title)
-                .foregroundStyle(isSelected ? Color.black : Color.gray)
+                .foregroundStyle(isActive ? Color.black : Color.gray)
         }
     }
 }
 
 #Preview {
-    BasicButtonVIew()
+    VStack {
+        BasicButtonView(title: "Active Button")
+        BasicButtonView(title: "Inactive Button", isActive: false)
+    }
+    .padding(.horizontal)
 }

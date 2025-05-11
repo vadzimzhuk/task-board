@@ -194,13 +194,13 @@ struct BoardView: View {
                             .foregroundColor(.primary)
                     })
                     .sheet(isPresented: $createNewTask) {
-                        TaskSheetView()
+                        TaskSheetView(context: context)
                             .presentationDetents([.height(380)])
                             .presentationBackground(.thinMaterial)
                     }
                     .sheet(isPresented: $editTask) {
                         if let editedTask {
-                            TaskSheetView(editedTask: editedTask)
+                            TaskSheetView(editedTask: editedTask, context: context)
                                 .presentationDetents([.height(380)])
                                 .presentationBackground(.thinMaterial)
                         } else { EmptyView() }

@@ -9,27 +9,25 @@ import SwiftData
 //@MainActor
 @Model
 class Task: Identifiable, Codable, Transferable {
-    static var transferRepresentation: some TransferRepresentation {
-        CodableRepresentation(contentType: .content)
-    }
+    static var transferRepresentation: some TransferRepresentation { CodableRepresentation(contentType: .content) }
     
     var id: UUID
     var title: String
     var dueDate: Date?
     var completionDate: Date?
     var creationDate: Date
-    var isCompleted: Bool {
-        taskState == .completed
-    }
+    var isCompleted: Bool { taskState == .completed }
     var taskState: TaskState
+    var project: Project?
     
-    init(id: UUID = .init(), title: String, dueDate: Date? = nil, taskState: TaskState = .open, creationDate: Date = Date(), completionDate: Date? = nil) {
+    init(id: UUID = .init(), title: String, dueDate: Date? = nil, taskState: TaskState = .open, creationDate: Date = Date(), completionDate: Date? = nil, project: Project? = nil) {
         self.id = id
         self.title = title
         self.dueDate = dueDate
         self.taskState = taskState
         self.creationDate = creationDate
         self.completionDate = completionDate
+        self.project = project
     }
     
     required init(from decoder: any Decoder) throws {
@@ -40,6 +38,7 @@ class Task: Identifiable, Codable, Transferable {
         taskState = (try? values.decode(TaskState.self, forKey: .taskState)) ?? .open
         creationDate = (try? values.decode(Date.self, forKey: .creationDate)) ?? Date()
         completionDate = try? values.decode(Date?.self, forKey: .completionDate)
+        project = try? values.decode(Project?.self, forKey: .project)
     }
     
     func encode(to encoder: any Encoder) throws {
@@ -51,6 +50,7 @@ class Task: Identifiable, Codable, Transferable {
         try container.encode(isCompleted, forKey: .isCompleted)
         try container.encode(creationDate, forKey: .creationDate)
         try container.encode(completionDate, forKey: .completionDate)
+        try container.encode(project, forKey: .project)
     }
     
     enum CodingKeys: String, CodingKey {
@@ -61,6 +61,7 @@ class Task: Identifiable, Codable, Transferable {
         case taskState
         case creationDate
         case completionDate
+        case project
     }
 }
 

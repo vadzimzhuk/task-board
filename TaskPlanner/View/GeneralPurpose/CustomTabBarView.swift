@@ -15,7 +15,7 @@ struct CustomTabBarView: View {
         VStack {
             HStack {
                 ForEach(0..<tabBarItems.count, id: \.self) { index in
-                    BasicButtonVIew(title: tabBarItems[index].title, isSelected: selectedIndex == index)
+                    BasicButtonView(title: tabBarItems[index].title, isActive: selectedIndex == index)
                     .onTapGesture {
                         selectedIndex = index
                     }

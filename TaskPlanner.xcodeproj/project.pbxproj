@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5B877D5D2BD51EB700444F9C /* TaskItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B877D5C2BD51EB700444F9C /* TaskItemView.swift */; };
 		5BB787712BD3D52400042BE5 /* WeekHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB787702BD3D52400042BE5 /* WeekHeaderView.swift */; };
-		5BB7877A2BD45C9500042BE5 /* TaskSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB787792BD45C9500042BE5 /* TaskSheetView.swift */; };
+		5BB7877A2BD45C9500042BE5 /* TaskCreationSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB787792BD45C9500042BE5 /* TaskCreationSheetView.swift */; };
 		5BD2FFDE2BD9405700E299BE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD2FFDD2BD9405700E299BE /* Color.swift */; };
 		5BED12002BD2FAC200147ACD /* TaskPlannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BED11FF2BD2FAC200147ACD /* TaskPlannerApp.swift */; };
 		5BED12042BD2FAC300147ACD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BED12032BD2FAC300147ACD /* Assets.xcassets */; };
@@ -25,14 +25,17 @@
 		8029630E2D6BB0370075E8CB /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8029630D2D6BB0370075E8CB /* TabBarItem.swift */; };
 		802963102D6BB0A00075E8CB /* BlurVisualEffectViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8029630F2D6BB0A00075E8CB /* BlurVisualEffectViewRepresentable.swift */; };
 		802963122D6BB27A0075E8CB /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802963112D6BB26F0075E8CB /* BoardView.swift */; };
-		809FD38D2DCE43E100543832 /* BasicButtonVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809FD38C2DCE43E100543832 /* BasicButtonVIew.swift */; };
+		809FD38D2DCE43E100543832 /* BasicButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809FD38C2DCE43E100543832 /* BasicButtonView.swift */; };
 		809FD38F2DCE501100543832 /* NewTicketButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809FD38E2DCE501100543832 /* NewTicketButton.swift */; };
+		809FD3912DCF9B5D00543832 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809FD3902DCF9B5D00543832 /* Project.swift */; };
+		809FD3932DCFBA5100543832 /* ProjectSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809FD3922DCFBA5100543832 /* ProjectSelectorView.swift */; };
+		809FD3952DCFBD4700543832 /* ProjectCreationSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809FD3942DCFBD4700543832 /* ProjectCreationSheetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5B877D5C2BD51EB700444F9C /* TaskItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemView.swift; sourceTree = "<group>"; };
 		5BB787702BD3D52400042BE5 /* WeekHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekHeaderView.swift; sourceTree = "<group>"; };
-		5BB787792BD45C9500042BE5 /* TaskSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSheetView.swift; sourceTree = "<group>"; };
+		5BB787792BD45C9500042BE5 /* TaskCreationSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreationSheetView.swift; sourceTree = "<group>"; };
 		5BD2FFDD2BD9405700E299BE /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		5BED11FC2BD2FAC200147ACD /* TaskPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BED11FF2BD2FAC200147ACD /* TaskPlannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPlannerApp.swift; sourceTree = "<group>"; };
@@ -49,8 +52,11 @@
 		8029630D2D6BB0370075E8CB /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		8029630F2D6BB0A00075E8CB /* BlurVisualEffectViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurVisualEffectViewRepresentable.swift; sourceTree = "<group>"; };
 		802963112D6BB26F0075E8CB /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
-		809FD38C2DCE43E100543832 /* BasicButtonVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicButtonVIew.swift; sourceTree = "<group>"; };
+		809FD38C2DCE43E100543832 /* BasicButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicButtonView.swift; sourceTree = "<group>"; };
 		809FD38E2DCE501100543832 /* NewTicketButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTicketButton.swift; sourceTree = "<group>"; };
+		809FD3902DCF9B5D00543832 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		809FD3922DCFBA5100543832 /* ProjectSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSelectorView.swift; sourceTree = "<group>"; };
+		809FD3942DCFBD4700543832 /* ProjectCreationSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCreationSheetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				5BED120F2BD2FB6200147ACD /* Task.swift */,
+				809FD3902DCF9B5D00543832 /* Project.swift */,
 				5BED12172BD30CB900147ACD /* Week.swift */,
 			);
 			path = Model;
@@ -144,7 +151,7 @@
 				802963082D6BAF150075E8CB /* CustomTabBarContainerView.swift */,
 				8029630D2D6BB0370075E8CB /* TabBarItem.swift */,
 				8029630B2D6BAFCE0075E8CB /* CustomTabBarView.swift */,
-				809FD38C2DCE43E100543832 /* BasicButtonVIew.swift */,
+				809FD38C2DCE43E100543832 /* BasicButtonView.swift */,
 				8029630F2D6BB0A00075E8CB /* BlurVisualEffectViewRepresentable.swift */,
 			);
 			path = GeneralPurpose;
@@ -174,7 +181,9 @@
 		80E394192D6E686800E0D1BB /* Dialogs */ = {
 			isa = PBXGroup;
 			children = (
-				5BB787792BD45C9500042BE5 /* TaskSheetView.swift */,
+				5BB787792BD45C9500042BE5 /* TaskCreationSheetView.swift */,
+				809FD3942DCFBD4700543832 /* ProjectCreationSheetView.swift */,
+				809FD3922DCFBA5100543832 /* ProjectSelectorView.swift */,
 			);
 			path = Dialogs;
 			sourceTree = "<group>";
@@ -249,12 +258,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				809FD38D2DCE43E100543832 /* BasicButtonVIew.swift in Sources */,
+				809FD38D2DCE43E100543832 /* BasicButtonView.swift in Sources */,
 				5BED12102BD2FB6200147ACD /* Task.swift in Sources */,
 				5BED12162BD3036600147ACD /* TaskViewModel.swift in Sources */,
+				809FD3932DCFBA5100543832 /* ProjectSelectorView.swift in Sources */,
 				802963092D6BAF150075E8CB /* CustomTabBarContainerView.swift in Sources */,
 				8029630C2D6BAFCE0075E8CB /* CustomTabBarView.swift in Sources */,
 				5BD2FFDE2BD9405700E299BE /* Color.swift in Sources */,
+				809FD3952DCFBD4700543832 /* ProjectCreationSheetView.swift in Sources */,
+				809FD3912DCF9B5D00543832 /* Project.swift in Sources */,
 				5BED12182BD30CB900147ACD /* Week.swift in Sources */,
 				5B877D5D2BD51EB700444F9C /* TaskItemView.swift in Sources */,
 				809FD38F2DCE501100543832 /* NewTicketButton.swift in Sources */,
@@ -262,7 +274,7 @@
 				5BED12142BD2FDF600147ACD /* TaskView.swift in Sources */,
 				802963102D6BB0A00075E8CB /* BlurVisualEffectViewRepresentable.swift in Sources */,
 				8029630E2D6BB0370075E8CB /* TabBarItem.swift in Sources */,
-				5BB7877A2BD45C9500042BE5 /* TaskSheetView.swift in Sources */,
+				5BB7877A2BD45C9500042BE5 /* TaskCreationSheetView.swift in Sources */,
 				802963122D6BB27A0075E8CB /* BoardView.swift in Sources */,
 				5BED12002BD2FAC200147ACD /* TaskPlannerApp.swift in Sources */,
 				8001D5C92D6BC7D900A8F5C9 /* TaskBoardCardView.swift in Sources */,

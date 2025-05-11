@@ -10,6 +10,7 @@ struct TaskView: View {
     @StateObject var viewModel = TaskViewModel()
     @State private var createNewTask: Bool = false
     @State var currentDate: Date = .init()
+    @Environment(\.modelContext) private var context
         
     var body: some View {
         NavigationStack {
@@ -51,7 +52,7 @@ struct TaskView: View {
                                 .foregroundColor(.primary)
                         })
                             .sheet(isPresented: $createNewTask) {
-                                TaskSheetView()
+                                TaskSheetView(context: context)
                                     .presentationDetents([.height(380)])
                                     .presentationBackground(.thinMaterial)
                             }
