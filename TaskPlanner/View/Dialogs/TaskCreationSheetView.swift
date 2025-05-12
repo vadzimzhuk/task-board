@@ -97,7 +97,7 @@ struct TaskSheetView: View {
                             viewModel.projectCreationMode = true
                         }, label:
                                     {
-                            Text("New project")
+                            Text(viewModel.project == nil ? "New project" : "Edit project")
                         })
                     }
                     
@@ -150,7 +150,7 @@ struct TaskSheetView: View {
 // Move away
 extension ModelContext {
     static var preview: ModelContext {
-        let schema = Schema([Task.self, Project.self]) // ← Add all your SwiftData entities here!
+        let schema = Schema([Task.self, Project.self])
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
 
         do {

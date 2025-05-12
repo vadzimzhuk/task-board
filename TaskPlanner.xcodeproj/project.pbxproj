@@ -30,6 +30,8 @@
 		809FD3912DCF9B5D00543832 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809FD3902DCF9B5D00543832 /* Project.swift */; };
 		809FD3932DCFBA5100543832 /* ProjectSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809FD3922DCFBA5100543832 /* ProjectSelectorView.swift */; };
 		809FD3952DCFBD4700543832 /* ProjectCreationSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809FD3942DCFBD4700543832 /* ProjectCreationSheetView.swift */; };
+		809FD3972DD13CD200543832 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809FD3962DD13CD200543832 /* ColorPickerView.swift */; };
+		80FB588C2DD1DF31004FB47D /* HorizontalProjectsSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FB588B2DD1DF31004FB47D /* HorizontalProjectsSelectorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +59,8 @@
 		809FD3902DCF9B5D00543832 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		809FD3922DCFBA5100543832 /* ProjectSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSelectorView.swift; sourceTree = "<group>"; };
 		809FD3942DCFBD4700543832 /* ProjectCreationSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCreationSheetView.swift; sourceTree = "<group>"; };
+		809FD3962DD13CD200543832 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
+		80FB588B2DD1DF31004FB47D /* HorizontalProjectsSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProjectsSelectorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +157,7 @@
 				8029630B2D6BAFCE0075E8CB /* CustomTabBarView.swift */,
 				809FD38C2DCE43E100543832 /* BasicButtonView.swift */,
 				8029630F2D6BB0A00075E8CB /* BlurVisualEffectViewRepresentable.swift */,
+				80FB588B2DD1DF31004FB47D /* HorizontalProjectsSelectorView.swift */,
 			);
 			path = GeneralPurpose;
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 			children = (
 				5BB787792BD45C9500042BE5 /* TaskCreationSheetView.swift */,
 				809FD3942DCFBD4700543832 /* ProjectCreationSheetView.swift */,
+				809FD3962DD13CD200543832 /* ColorPickerView.swift */,
 				809FD3922DCFBA5100543832 /* ProjectSelectorView.swift */,
 			);
 			path = Dialogs;
@@ -269,10 +275,12 @@
 				809FD3912DCF9B5D00543832 /* Project.swift in Sources */,
 				5BED12182BD30CB900147ACD /* Week.swift in Sources */,
 				5B877D5D2BD51EB700444F9C /* TaskItemView.swift in Sources */,
+				80FB588C2DD1DF31004FB47D /* HorizontalProjectsSelectorView.swift in Sources */,
 				809FD38F2DCE501100543832 /* NewTicketButton.swift in Sources */,
 				5BED120E2BD2FB1000147ACD /* TaskListView.swift in Sources */,
 				5BED12142BD2FDF600147ACD /* TaskView.swift in Sources */,
 				802963102D6BB0A00075E8CB /* BlurVisualEffectViewRepresentable.swift in Sources */,
+				809FD3972DD13CD200543832 /* ColorPickerView.swift in Sources */,
 				8029630E2D6BB0370075E8CB /* TabBarItem.swift in Sources */,
 				5BB7877A2BD45C9500042BE5 /* TaskCreationSheetView.swift in Sources */,
 				802963122D6BB27A0075E8CB /* BoardView.swift in Sources */,

@@ -10,11 +10,10 @@ import SwiftData
 
 struct ProjectCreationSheetView: View {
     @Binding var project: Project?
+    @State private var isCreation: Bool = false
     
     @State var projectName: String = ""
-//    @State var selectedColor: Color = .blue
-    
-//    var colors: [Color] = [.blue, .orange, .pink, .purple, .brown, .yellow, .red, .green, .yellow]
+    @State var selectedColor: Color = .blue
     
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) private var context
@@ -22,12 +21,6 @@ struct ProjectCreationSheetView: View {
     var body: some View {
 //        Form {
             VStack {
-//                Picker("Color", selection: $selectedColor) {
-//                    ForEach(colors, id: \.hashValue) { color in
-//                        Text(color.description).tag(color)
-//                    }
-//                }
-                
                 TextField("Name", text: $projectName)
                     .padding(10)
                     .background(Color(.systemGray6).opacity(0.3))
@@ -39,12 +32,19 @@ struct ProjectCreationSheetView: View {
                     .font(.body)
                     .frame(height: 25)
                 
+                ColorPickerView(selectedColor: $selectedColor)
+                
                 Button {
-                    let project = Project(name: projectName, color: ""/*selectedColor.description*/)
-                    self.project = project
-                    print(project)
+                    if let _ = project {
+                        project?.name = projectName
+                        project?.color = selectedColor
+                    } else {
+                        let project = Project(name: projectName)
+                        project.color = selectedColor
+                        self.project = project
+                        context.insert(project)
+                    }
                     
-                    context.insert(project)
                     do {
                         try context.save()
                         dismiss()
@@ -52,7 +52,7 @@ struct ProjectCreationSheetView: View {
                         print(error.localizedDescription)
                     }
                 } label: {
-                    Text("Create")
+                    Text(project == nil ? "Create" : "Save")
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity)
                         .frame(height: 48)
@@ -62,7 +62,10 @@ struct ProjectCreationSheetView: View {
                         .padding()
                 }
                 
-            }            
+            }
+            .onAppear() {
+                projectName = project?.name ?? ""
+            }
 //        }
     }
 }

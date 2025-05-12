@@ -9,50 +9,77 @@ import Foundation
 import SwiftData
 
 @Model
-class Project: Identifiable, Codable {
-    var id: UUID
+class Project: Identifiable {
+    @Attribute(.unique) var id: UUID
     var name: String
-    var color: String
+    
+    @Relationship(deleteRule: .cascade, inverse: \Task.project)
     var tasks: [Task] = []
     
-    init(name: String, color: String = "", tasks: [Task] = []) {
+    var colorData: Data?
+    
+    init(name: String, tasks: [Task] = []) {
         self.id = UUID()
         self.name = name
-        self.color = color
         self.tasks = tasks
     }
     
-    required init(from decoder: any Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(UUID.self, forKey: .id)
-        self.name = try container.decode(String.self, forKey: .name)
-        self.color = try container.decode(String.self, forKey: .color)
-        self.tasks = try container.decode([Task].self, forKey: .tasks)
-        
-        for task in tasks {
-            task.project = self
-        }
-    }
-    
-    func encode(to encoder: any Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
-        try container.encode(name, forKey: .name)
-        try container.encode(color, forKey: .color)
-        
+//    required init(from decoder: any Decoder) throws {
+//        fatalError("this method should not be used as task copying is not supported")
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        self.id = try container.decode(UUID.self, forKey: .id)
+//        self.name = try container.decode(String.self, forKey: .name)
+//        self.colorData = try container.decode(Data.self, forKey: .color)
+//        self.tasks = try container.decode([Task].self, forKey: .tasks)
+//        
+//        // Restore Task reference to Project
+//        for task in tasks {
+//            task.project = self
+//        }
+//    }
+//    
+//    func encode(to encoder: any Encoder) throws {
+//        fatalError("this method should not be used as task copying is not supported")
+//        var container = encoder.container(keyedBy: CodingKeys.self)
+//        try container.encode(id, forKey: .id)
+//        try container.encode(name, forKey: .name)
+//        try container.encode(colorData, forKey: .color)
+//        
+//        // Remove Task reference to Project
 //        let tasksWithoutProject = tasks.map { task in
 //            Task(title: task.title)
 //        }
-        
-        let tasksWithoutProject = tasks.map {
-            $0.project = nil
-            return $0
+//        
+//        try container.encode(tasksWithoutProject, forKey: .tasks)
+//    }
+    
+//    enum CodingKeys: String, CodingKey {
+//        case id, name, color, tasks
+//    }
+}
+
+import SwiftUI
+
+extension Project {
+    var color: Color {
+        get {
+            guard let colorData else { return .black }
+            
+            do {
+                let color = try Color.decodeColor(from: colorData)
+                return color
+            } catch {
+                assertionFailure("Failed to decode color with error: \(error)")
+                return .black
+            }
         }
         
-        try container.encode(tasksWithoutProject, forKey: .tasks)
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case id, name, color, tasks
+        set {
+            do {
+                try colorData = newValue.encode()
+            } catch {
+                assertionFailure("Failed to encode color with error: \(error)")
+            }
+        }
     }
 }

@@ -11,6 +11,7 @@ import SwiftData
 struct BoardView: View {
     
     @Query private var tasks: [Task]
+    @Query private var projects: [Project]
     
     @Query private var openTasks: [Task]
     @Query private var inProgressTasks: [Task]
@@ -25,7 +26,17 @@ struct BoardView: View {
     @State private var createNewTask: Bool = false
     @State private var editTask: Bool = false
     @State private var editedTask: Task?
-    @State private var itemDragged: Task?
+    @State private var itemDragged: TaskDTO?
+    
+    @State private var selectedProjects: Set<String> = []
+    
+//    private var filteredTasksPredicate: Predicate<Task> {
+////        let selectedIDs = selectedProjects
+//
+//        return #Predicate<Task> { task in
+//            selectedProjects.contains(task.projectIdString)
+//        }
+//    }
     
     let columns = [
         GridItem(.flexible()),
@@ -51,22 +62,48 @@ struct BoardView: View {
         
         let descriptor = FetchDescriptor<Task>()
         self._tasks = Query(descriptor)
+        
+        let projectDescriptor = FetchDescriptor<Project>()
+        self._projects = Query(projectDescriptor)
+    }
+    
+    private func filteredTasks(_ inputTasks: [Task]) -> [Task] {
+        let outputTasks = inputTasks.filter { task in
+            selectedProjects.contains(task.projectIdString)
+        }
+        
+        return outputTasks
+    }
+    
+    private func handleDropDestination(droppedTasks: [TaskDTO], droppedState: TaskState) -> Bool {
+        for droppedTask in droppedTasks {
+            if let task = (self.tasks.first { $0.id == droppedTask.id }){
+                // switch state on model object
+                task.taskState = droppedState
+            }
+        }
+        itemDragged = nil
+        try? context.save()
+        
+        return true
     }
     
     var body: some View {
-//        NavigationStack {
             ScrollView(.vertical, showsIndicators: true) {
                 VStack{
+                    Spacer()
+                        .padding(.top, 50)
+                    HorizontalProjectsSelectorView(projects: projects, selectedProjects: $selectedProjects)
                     HStack(alignment: .top) {
                         LazyVStack {
                             Text("Open")
                                 .font(.headline)
                             
-                            ForEach(openTasks) { task in
+                            ForEach(filteredTasks(openTasks)) { task in
                                 TaskBoardCardView(task: task)
                                     .draggable({
-                                        itemDragged = task
-                                        return task
+                                        itemDragged = task.dto
+                                        return task.dto
                                     }())
                                     .onTapGesture {
                                         editedTask = task
@@ -79,17 +116,8 @@ struct BoardView: View {
                             Background(isTargeted: $isTargeted1)
                                 .frame(minHeight: 600)
                         }
-                        .padding(.top, 100)
-                        .dropDestination(for: Task.self) { tasks, location in
-                            for task in tasks {
-                                if let task = (self.tasks.first { $0.id == task.id }){
-                                    task.taskState = .open
-                                }
-                            }
-                            itemDragged = nil
-                            try? context.save()
-                            
-                            return true
+                        .dropDestination(for: TaskDTO.self) { tasks, location in
+                            return handleDropDestination(droppedTasks: tasks, droppedState: .open)
                         }
                         isTargeted: { targeted in
                             guard let item = itemDragged,
@@ -105,11 +133,11 @@ struct BoardView: View {
                             Text("In Progress")
                                 .font(.headline)
                             
-                            ForEach(inProgressTasks) { task in
+                            ForEach(filteredTasks(inProgressTasks)) { task in
                                 TaskBoardCardView(task: task)
                                     .draggable({
-                                        itemDragged = task
-                                        return task
+                                        itemDragged = task.dto
+                                        return task.dto
                                     }())
                                     .onTapGesture {
                                         editedTask = task
@@ -119,17 +147,8 @@ struct BoardView: View {
                             Background(isTargeted: $isTargeted2)
                                 .frame(minHeight: 600)
                         }
-                        .padding(.top, 100)
-                        .dropDestination(for: Task.self) { tasks, location in
-                            for task in tasks {
-                                if let task = (self.tasks.first { $0.id == task.id }){
-                                    task.taskState = .inProgress
-                                }
-                            }
-                            itemDragged = nil
-                            try? context.save()
-                            
-                            return true
+                        .dropDestination(for: TaskDTO.self) { tasks, location in
+                            return handleDropDestination(droppedTasks: tasks, droppedState: .inProgress)
                         }
                         isTargeted: { targeted in
                             guard let item = itemDragged,
@@ -145,11 +164,11 @@ struct BoardView: View {
                             Text("Done")
                                 .font(.headline)
                             
-                            ForEach(completedTasks) { task in
+                            ForEach(filteredTasks(completedTasks)) { task in
                                 TaskBoardCardView(task: task)
                                     .draggable({
-                                        itemDragged = task
-                                        return task
+                                        itemDragged = task.dto
+                                        return task.dto
                                     }())
                                     .onTapGesture {
                                         editedTask = task
@@ -159,17 +178,8 @@ struct BoardView: View {
                             Background(isTargeted: $isTargeted3)
                                 .frame(minHeight: 600)
                         }
-                        .padding(.top, 100)
-                        .dropDestination(for: Task.self) { tasks, location in
-                            for task in tasks {
-                                if let task = (self.tasks.first { $0.id == task.id }){
-                                    task.taskState = .completed
-                                }
-                            }
-                            itemDragged = nil
-                            try? context.save()
-                            
-                            return true
+                        .dropDestination(for: TaskDTO.self) { tasks, location in
+                            return handleDropDestination(droppedTasks: tasks, droppedState: .completed)
                         } isTargeted: { targeted in
                             guard let item = itemDragged,
                                   item.taskState != .completed else  { return }
@@ -181,7 +191,6 @@ struct BoardView: View {
                         .background(Background(isTargeted: $isTargeted3))
                     }
                 }
-//                .padding(.top, 100)
             }
             .padding(10)
             .ignoresSafeArea()
@@ -215,6 +224,12 @@ struct BoardView: View {
                     editedTask = nil
                 }
             }
+            .onAppear() {
+                var projectIds = Set(projects.map{$0.id.uuidString})
+                projectIds.insert("")
+                selectedProjects = projectIds
+                
+            }
 //        }
     }
 }
@@ -229,4 +244,10 @@ private struct Background: View {
 
 #Preview{
     BoardView()
+}
+
+private extension Task {
+    var projectIdString: String {
+        self.project?.id.uuidString ?? ""
+    }
 }

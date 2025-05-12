@@ -19,10 +19,12 @@ struct TaskBoardCardView: View {
                     Text(task.title)
                         .fixedSize(horizontal: false, vertical: false)
                         .font(Font.system(size: 12, weight: .bold))
+                        .foregroundStyle(task.project?.color ?? Color.black)
                         .strikethrough()
                 } else {
                     Text(task.title)
                         .font(Font.system(size: 12, weight: .bold))
+                        .foregroundStyle(task.project?.color ?? Color.black)
                 }
             }
             .frame(height: 55)
@@ -31,7 +33,7 @@ struct TaskBoardCardView: View {
             .background(isSwipingToDelete ? Color.red.opacity(0.7) : .white)
             .overlay(
                 RoundedRectangle(cornerRadius: 0)
-                    .stroke(Color.black, lineWidth: 1)
+                    .stroke(task.project?.color ?? Color.black, lineWidth: 1)
             )
             .opacity(2 - Double(abs(offset.width / 90)))
     }
