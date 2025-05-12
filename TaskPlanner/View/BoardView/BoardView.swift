@@ -30,14 +30,6 @@ struct BoardView: View {
     
     @State private var selectedProjects: Set<String> = []
     
-//    private var filteredTasksPredicate: Predicate<Task> {
-////        let selectedIDs = selectedProjects
-//
-//        return #Predicate<Task> { task in
-//            selectedProjects.contains(task.projectIdString)
-//        }
-//    }
-    
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -89,148 +81,163 @@ struct BoardView: View {
     }
     
     var body: some View {
-            ScrollView(.vertical, showsIndicators: true) {
-                VStack{
-                    Spacer()
-                        .padding(.top, 50)
-                    HorizontalProjectsSelectorView(projects: projects, selectedProjects: $selectedProjects)
-                    HStack(alignment: .top) {
-                        LazyVStack {
-                            Text("Open")
-                                .font(.headline)
-                            
-                            ForEach(filteredTasks(openTasks)) { task in
-                                TaskBoardCardView(task: task)
-                                    .draggable({
-                                        itemDragged = task.dto
-                                        return task.dto
-                                    }())
-                                    .onTapGesture {
-                                        editedTask = task
-                                    }
+            VStack {
+                HorizontalProjectsSelectorView(projects: projects, selectedProjects: $selectedProjects)
+                
+                HStack {
+                    Text("Open".capitalized)
+                        .font(.subheadline)
+                        .frame(maxWidth: .infinity)
+                    Text("In Progress".capitalized)
+                        .font(.subheadline)
+                        .frame(maxWidth: .infinity)
+                    Text("Done".capitalized)
+                        .font(.subheadline)
+                        .frame(maxWidth: .infinity)
+                }
+                
+                Rectangle()
+                    .frame(height: 1)
+                    .foregroundColor(Color.gray)
+                
+                Spacer()
+                
+                ScrollView(.vertical, showsIndicators: true) {
+                    VStack{
+                        HStack(alignment: .top) {
+                            LazyVStack {
+                                
+                                ForEach(filteredTasks(openTasks)) { task in
+                                    TaskBoardCardView(task: task)
+                                        .draggable({
+                                            itemDragged = task.dto
+                                            return task.dto
+                                        }())
+                                        .onTapGesture {
+                                            editedTask = task
+                                        }
+                                }
+                                
+                                NewTicketButton(createNewTask: $createNewTask)
+                                    .padding(.top)
+                                
+                                Background(isTargeted: $isTargeted1)
+                                    .frame(minHeight: 600)
                             }
-                            
-                            NewTicketButton(createNewTask: $createNewTask)
-                                .padding(.top)
-                            
-                            Background(isTargeted: $isTargeted1)
-                                .frame(minHeight: 600)
-                        }
-                        .dropDestination(for: TaskDTO.self) { tasks, location in
-                            return handleDropDestination(droppedTasks: tasks, droppedState: .open)
-                        }
-                        isTargeted: { targeted in
-                            guard let item = itemDragged,
-                                  item.taskState != .open else  { return }
-                            
-                            withAnimation(.easeIn) {
-                                isTargeted1 = targeted
+                            .dropDestination(for: TaskDTO.self) { tasks, location in
+                                return handleDropDestination(droppedTasks: tasks, droppedState: .open)
                             }
-                        }
-                        .background(Background(isTargeted: $isTargeted1))
-                        
-                        LazyVStack {
-                            Text("In Progress")
-                                .font(.headline)
-                            
-                            ForEach(filteredTasks(inProgressTasks)) { task in
-                                TaskBoardCardView(task: task)
-                                    .draggable({
-                                        itemDragged = task.dto
-                                        return task.dto
-                                    }())
-                                    .onTapGesture {
-                                        editedTask = task
-                                    }
+                            isTargeted: { targeted in
+                                guard let item = itemDragged,
+                                      item.taskState != .open else  { return }
+                                
+                                withAnimation(.easeIn) {
+                                    isTargeted1 = targeted
+                                }
                             }
+                            .background(Background(isTargeted: $isTargeted1))
                             
-                            Background(isTargeted: $isTargeted2)
-                                .frame(minHeight: 600)
-                        }
-                        .dropDestination(for: TaskDTO.self) { tasks, location in
-                            return handleDropDestination(droppedTasks: tasks, droppedState: .inProgress)
-                        }
-                        isTargeted: { targeted in
-                            guard let item = itemDragged,
-                                  item.taskState != .inProgress else  { return }
-                            
-                            withAnimation(.easeIn) {
-                                isTargeted2 = targeted
+                            LazyVStack {
+                                
+                                ForEach(filteredTasks(inProgressTasks)) { task in
+                                    TaskBoardCardView(task: task)
+                                        .draggable({
+                                            itemDragged = task.dto
+                                            return task.dto
+                                        }())
+                                        .onTapGesture {
+                                            editedTask = task
+                                        }
+                                }
+                                
+                                Background(isTargeted: $isTargeted2)
+                                    .frame(minHeight: 600)
                             }
-                        }
-                        .background(Background(isTargeted: $isTargeted2))
-                        
-                        LazyVStack {
-                            Text("Done")
-                                .font(.headline)
-                            
-                            ForEach(filteredTasks(completedTasks)) { task in
-                                TaskBoardCardView(task: task)
-                                    .draggable({
-                                        itemDragged = task.dto
-                                        return task.dto
-                                    }())
-                                    .onTapGesture {
-                                        editedTask = task
-                                    }
+                            .dropDestination(for: TaskDTO.self) { tasks, location in
+                                return handleDropDestination(droppedTasks: tasks, droppedState: .inProgress)
                             }
-                            
-                            Background(isTargeted: $isTargeted3)
-                                .frame(minHeight: 600)
-                        }
-                        .dropDestination(for: TaskDTO.self) { tasks, location in
-                            return handleDropDestination(droppedTasks: tasks, droppedState: .completed)
-                        } isTargeted: { targeted in
-                            guard let item = itemDragged,
-                                  item.taskState != .completed else  { return }
-                            
-                            withAnimation(.easeIn) {
-                                isTargeted3 = targeted
+                            isTargeted: { targeted in
+                                guard let item = itemDragged,
+                                      item.taskState != .inProgress else  { return }
+                                
+                                withAnimation(.easeIn) {
+                                    isTargeted2 = targeted
+                                }
                             }
+                            .background(Background(isTargeted: $isTargeted2))
+                            
+                            LazyVStack {
+                                
+                                ForEach(filteredTasks(completedTasks)) { task in
+                                    TaskBoardCardView(task: task)
+                                        .draggable({
+                                            itemDragged = task.dto
+                                            return task.dto
+                                        }())
+                                        .onTapGesture {
+                                            editedTask = task
+                                        }
+                                }
+                                
+                                Background(isTargeted: $isTargeted3)
+                                    .frame(minHeight: 600)
+                            }
+                            .dropDestination(for: TaskDTO.self) { tasks, location in
+                                return handleDropDestination(droppedTasks: tasks, droppedState: .completed)
+                            } isTargeted: { targeted in
+                                guard let item = itemDragged,
+                                      item.taskState != .completed else  { return }
+                                
+                                withAnimation(.easeIn) {
+                                    isTargeted3 = targeted
+                                }
+                            }
+                            .background(Background(isTargeted: $isTargeted3))
                         }
-                        .background(Background(isTargeted: $isTargeted3))
                     }
                 }
-            }
-            .padding(10)
-            .ignoresSafeArea()
-            .toolbar{
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {
-                        createNewTask = true
-                    }, label: {
-                        Image(systemName: "plus")
-                            .foregroundColor(.primary)
-                    })
-                    .sheet(isPresented: $createNewTask) {
-                        TaskSheetView(context: context)
-                            .presentationDetents([.height(380)])
-                            .presentationBackground(.thinMaterial)
-                    }
-                    .sheet(isPresented: $editTask) {
-                        if let editedTask {
-                            TaskSheetView(editedTask: editedTask, context: context)
+                .padding(10)
+                .toolbar{
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(action: {
+                            createNewTask = true
+                        }, label: {
+                            Image(systemName: "plus")
+                                .foregroundColor(.primary)
+                        })
+                        .sheet(isPresented: $createNewTask) {
+                            TaskSheetView(context: context)
                                 .presentationDetents([.height(380)])
                                 .presentationBackground(.thinMaterial)
-                        } else { EmptyView() }
+                        }
+                        .sheet(isPresented: $editTask) {
+                            if let editedTask {
+                                TaskSheetView(editedTask: editedTask, context: context)
+                                    .presentationDetents([.height(380)])
+                                    .presentationBackground(.thinMaterial)
+                            } else { EmptyView() }
+                        }
                     }
                 }
-            }
-            .onChange(of: editedTask) { oldValue, newValue in
-                editTask = editedTask != nil
-            }
-            .onChange(of: editTask) { _, editTask in
-                if !editTask {
-                    editedTask = nil
+                .onChange(of: editedTask) { oldValue, newValue in
+                    editTask = editedTask != nil
+                }
+                .onChange(of: editTask) { _, editTask in
+                    if !editTask {
+                        editedTask = nil
+                    }
+                }
+                .onAppear() {
+                    var projectIds = Set(projects.map{$0.id.uuidString})
+                    projectIds.insert("")
+                    selectedProjects = projectIds
+                    
                 }
             }
-            .onAppear() {
-                var projectIds = Set(projects.map{$0.id.uuidString})
-                projectIds.insert("")
-                selectedProjects = projectIds
-                
+            .safeAreaInset(edge: .top) {
+                Color.clear.frame(height: 50)
             }
-//        }
+
     }
 }
 
